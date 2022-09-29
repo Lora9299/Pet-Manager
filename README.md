@@ -9,6 +9,8 @@ User mora imati polja:
 - adresa (opet napraviti kao embeddable - sva polja ista kao u Car Service)
 - password (ovo polje će trebati zbog autorizacije)
 
+Povezati aplikaciju s PostgreSQL bazom podataka. Nakon što se napravi entitet u Javi, isti taj entitet mora postojati u bazi po nazivom Users.
+
 
 User story 2 - Spremanje usera
 Potrebno je napraviti spremanje usera u bazu. Implementirati cijeli flow, od repository-a do thymeleaf templatea
