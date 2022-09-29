@@ -18,7 +18,7 @@ public class User {
 
     private String name;
     private String surname;
-    private String OIB;
+    private String oib;
 
     @Column(unique=true)
     private String email;
