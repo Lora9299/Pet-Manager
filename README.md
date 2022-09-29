@@ -36,9 +36,9 @@
 
 **User story 13** - Implementacija pretraživanja Animala po kriterijima:
 Udomljavanje/kupovina (Padajući izbornik - provjera da li postoji objekt “Adoptable” ili “Valued” unutar Animal objekta kako bi se koristio kriteriji)
-  Tip životinje (filter prema tipu)
-  Težina (filter prema težini)
-  Visina (filter prema visini)
+  - Tip životinje (filter prema tipu)
+  - Težina (filter prema težini)
+  - Visina (filter prema visini)
 Za implementaciju koristiti “Criteria builder” ili “Specifications”. Radi sa “Specifications”, to je preporuka šefa kuhinje Davora Aleksića
 
 **User story 14** - Dodavanje logina - dodavanje autentikacije i autorizacije (basic auth - Spring security).
