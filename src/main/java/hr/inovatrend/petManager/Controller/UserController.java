@@ -15,24 +15,43 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class UserController {
 
-private final UserService userService;
+    private final UserService userService;
 
-@GetMapping("/add")
-        private String addUserToDB(Model model){
+    @GetMapping("/add")
+    private String addUserToDB(Model model) {
 
-    model.addAttribute("user", new User());
-    return "user/add-user";
+        model.addAttribute("user", new User());
+        return "user/add-user";
 
-}
-
-    @PostMapping("/add")
-    private String createUser(@ModelAttribute User user){
-
-    userService.createUser(user);
-
-    return "redirect:/";
     }
 
+    @PostMapping("/add")
+    private String createUser(@ModelAttribute User user) {
+
+        userService.createUser(user);
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/edit/{id}")
+    private String editUser(@PathVariable("id") Long id, Model model) {
+
+
+        User user = userService.getUser(id);
+
+        model.addAttribute("user", user);
+
+        return "/user/edit-user";
+
+    }
+
+    @PostMapping("/edit/{id}")
+    private String userEdit(@PathVariable("id") Long id, @ModelAttribute User user) {
+
+        userService.createUser(user);
+
+        return "redirect:/";
+    }
 
 
 }
