@@ -21,4 +21,11 @@ public class UserServiceImpl implements UserService {
     public User getUser(Long id){
         return userRepository.findUserById(id);
     }
+
+    public void deleteUser(Long id){
+
+        userRepository.deleteById(id);
+
+    }
+
 }
