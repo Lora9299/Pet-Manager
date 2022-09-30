@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <title>Add User</title>
+</head>
+<body>
+
+
+<div class="container mt-5 mb-5">
+    <form th:action="'/user/edit/'+${user.getId()}" method="post" th:object="${user}">
+
+        <h4 class="mt-5 d-flex justify-content-center">Editing user: </h4>
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" name="name" placeholder="Name" id="name" th:field="*{name}">
+        </div>
+
+        <div class="mb-3">
+            <label for="surname" class="form-label">Surname</label>
+            <input type="text" class="form-control" name="surname" placeholder="Surname" id="surname"
+                   th:field="*{surname}">
+        </div>
+
+        <div class="mb-3">
+            <label for="oib" class="form-label">OIB</label>
+            <input type="text" class="form-control" name="oib" placeholder="OIB" id="oib" th:field="*{oib}">
+        </div>
+
+
+        <div class="mb-3">
+            <label for="street" class="form-label">Street</label>
+            <input type="text" class="form-control" name="street" placeholder="Name of street" id="street"
+                   th:field="*{address.streetName}">
+        </div>
+
+        <div class="mb-3">
+            <label for="streetNum" class="form-label">Street Number</label>
+            <input type="text" class="form-control" name="streetNum" placeholder="Street number" id="streetNum"
+                   th:field="*{address.streetNumber}">
+        </div>
+
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input type="text" class="form-control" name="country" placeholder="Country" id="country"
+                   th:field="*{address.country}">
+        </div>
+
+        <div class="mb-3">
+            <label for="city" class="form-label">City</label>
+            <input type="text" class="form-control" name="city" placeholder="City" id="city"
+                   th:field="*{address.city}">
+        </div>
+
+        <div class="mb-3">
+            <label for="zip" class="form-label">ZIP Code</label>
+            <input type="text" class="form-control" name="zip" placeholder="ZIP" id="zip"
+                   th:field="*{address.zip}">
+        </div>
+
+
+        <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="text" class="form-control" name="email" placeholder="E-mail" id="email" th:field="*{email}">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}">
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-secondary btn-lg">Submit</button>
+        </div>
+
+
+    </form>
+
+</div>
+
+</body>
+</html>
