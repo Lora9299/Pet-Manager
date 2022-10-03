@@ -17,4 +17,11 @@ public class Address {
     private String city;
     private String zip;
 
+    @Override
+    public  String toString(){
+
+        return this.streetName + " " + this.streetNumber + ", " + this.country + ", " + this.city + " " + this.zip;
+
+    }
+
 }
