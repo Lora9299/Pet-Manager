@@ -37,7 +37,7 @@ public class UserController {
     private String editUser(@PathVariable("id") Long id, Model model) {
 
 
-        User user = userService.getUser(id);
+        User user = userService.getUserById(id);
 
         model.addAttribute("user", user);
 
