@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -24,7 +23,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findUserById(id);
     }
 
-    public void deleteUser(Long id){
+    public void deleteUserById(Long id){
 
         userRepository.deleteById(id);
 
