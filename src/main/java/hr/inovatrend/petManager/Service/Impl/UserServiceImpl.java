@@ -6,6 +6,8 @@ import hr.inovatrend.petManager.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +27,12 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long id){
 
         userRepository.deleteById(id);
+
+    }
+
+    public List<User> getAll(){
+
+        return userRepository.findAll();
 
     }
 
