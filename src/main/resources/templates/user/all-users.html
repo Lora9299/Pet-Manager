@@ -24,7 +24,7 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/add}">Users</a>
+                    <a class="nav-link" th:href="@{/user/all}">Users</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -46,7 +46,7 @@
             <div class="d-flex align-middle px-5">
                 <form class="d-flex ">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-dark" type="submit">Search</button>
+                    <button class="btn btn-outline-dark" type="submit"><i class="fa fa-search"></i></button>
                 </form>
             </div>
 
@@ -57,7 +57,8 @@
     </div>
 </nav>
 
-<div class = "pt-4 me-5 d-flex justify-content-end "> <a> <button class="btn btn-secondary btn-lg">Add New User</button></a></div>
+<div class = "pt-4 me-5 d-flex justify-content-end "> <a th:href="@{/user/add}">
+    <button class="btn btn-secondary btn-lg">Add New User</button></a></div>
 
 <div class ="pb-5">
     <table class="table table-hover table-striped">
@@ -86,9 +87,7 @@
             <button class="btn btn-secondary btn-sm">Details</button></span>
 
             </td>
-
-
-            <td><span> <a th:href="'' + ${user.id}"> <button
+            <td><span> <a th:href="'/user/delete/' + ${user.id}"> <button
                     class="btn btn-secondary btn-sm">Delete</button></a></span>
             </td>
             <td></td>
