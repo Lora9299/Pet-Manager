@@ -61,7 +61,7 @@ public class UserController {
 
         userService.deleteUser(id);
 
-        return "redirect:/";
+        return "redirect:/user/all";
     }
 
     @GetMapping("/all")
