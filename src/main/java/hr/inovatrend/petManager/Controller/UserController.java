@@ -54,20 +54,32 @@ public class UserController {
     }
 
 
-        @GetMapping("/delete/{id}")
-        private String deleteUser(@PathVariable("id") Long id) {
+    @GetMapping("/delete/{id}")
+    private String deleteUser(@PathVariable("id") Long id) {
 
-            userService.deleteUserById(id);
+        userService.deleteUserById(id);
 
-            return "redirect:/user/all";
-        }
+        return "redirect:/user/all";
+    }
 
     @GetMapping("/all")
-    private String allUsers(Model model){
+    private String allUsers(Model model) {
 
-       model.addAttribute("users", userService.getAll());
+        model.addAttribute("users", userService.getAll());
 
-        return"/user/all-users";
+        return "/user/all-users";
+    }
+
+
+    @GetMapping("/info/{id}")
+    private String infoUser(@PathVariable("id") Long id, Model model) {
+
+        User user = userService.getUserById(id);
+
+        model.addAttribute("users", user);
+
+        return "/user/info-user";
+
     }
 
 
