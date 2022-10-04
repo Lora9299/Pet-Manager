@@ -20,6 +20,11 @@ public class Animal {
     @GeneratedValue
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "userid")
+
+    private User user;
+
     private String name;
     private Integer height;
     private Integer weight;
@@ -30,6 +35,5 @@ public class Animal {
 
     @Embedded
     private Valued valued;
-
 
 }
