@@ -6,12 +6,12 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
-    <meta charset="UTF-8">
-    <title>Pet Manager</title>
+    <title>All users</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Name-of-site</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/user/all}">Users</a>
@@ -43,18 +43,60 @@
 
             </ul>
 
-            <div class="d-flex align-middle px-5" >
+            <div class="d-flex align-middle px-5">
                 <form class="d-flex ">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-outline-dark" type="submit"><i class="fa fa-search"></i></button>
                 </form>
             </div>
 
-                <div class=" bd-highlight" >Log in</div>
-                <div class="nav-item px-3"><i class=" btn fa fa-user-circle-o fa-lg"></i></div>
+            <div class=" bd-highlight">Log in</div>
+            <div class="nav-item px-3"><i class=" btn fa fa-user-circle-o fa-lg"></i></div>
 
         </div>
     </div>
 </nav>
+
+<div class = "pt-4 me-5 d-flex justify-content-end "> <a th:href="@{/user/add}">
+    <button class="btn btn-secondary btn-lg">Add New User</button></a></div>
+
+<div class ="pb-5">
+    <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+            <th> Name</th>
+            <th> Surname</th>
+            <th> OIB</th>
+            <th> Address</th>
+            <th>E-mail</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+
+            <td><span th:text="${user.getName()}"> Name </span></td>
+            <td><span th:text="${user.getSurname()}"> Surname </span></td>
+            <td><span th:text="${user.getOib()}"> OIB </span></a></td>
+            <td><span th:text="${user.getAddress()}"> Address </span></td>
+            <td><span th:text="${user.getEmail()}"> E-mail </span></td>
+
+            <td><span> <a th:href="'/user/' + ${user.id}"> </a>
+            <button class="btn btn-secondary btn-sm">Details</button></span>
+
+            </td>
+            <td><span> <a th:href="'/user/delete/' + ${user.id}"> <button
+                    class="btn btn-secondary btn-sm">Delete</button></a></span>
+            </td>
+            <td></td>
+
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
 </body>
 </html>

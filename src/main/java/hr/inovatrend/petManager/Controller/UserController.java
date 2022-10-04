@@ -54,4 +54,21 @@ public class UserController {
     }
 
 
+        @GetMapping("/delete/{id}")
+        private String deleteUser(@PathVariable("id") Long id) {
+
+            userService.deleteUserById(id);
+
+            return "redirect:/user/all";
+        }
+
+    @GetMapping("/all")
+    private String allUsers(Model model){
+
+       model.addAttribute("users", userService.getAll());
+
+        return"/user/all-users";
+    }
+
+
 }
