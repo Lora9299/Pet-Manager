@@ -50,7 +50,7 @@ public class UserController {
 
         userService.createUser(user);
 
-        return "redirect:/";
+        return "redirect:/user/all";
     }
 
 
