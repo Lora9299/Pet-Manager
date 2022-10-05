@@ -6,8 +6,7 @@
 	      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
 	      rel="stylesheet">
-
-	<title>All users</title>
+	<title>Details</title>
 </head>
 <body>
 
@@ -33,18 +32,12 @@
 						Animals
 					</a>
 					<ul aria-labelledby="navbarDropdown" class="dropdown-menu">
-						<li>
-							<a class="dropdown-item" href="#">Action</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">Another action</a>
-						</li>
+						<li><a class="dropdown-item" href="#">Action</a></li>
+						<li><a class="dropdown-item" href="#">Another action</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
-						<li>
-							<a class="dropdown-item" href="#">Something else here</a>
-						</li>
+						<li><a class="dropdown-item" href="#">Something else here</a></li>
 					</ul>
 				</li>
 
@@ -53,80 +46,60 @@
 			<div class="d-flex align-middle px-5">
 				<form class="d-flex ">
 					<input aria-label="Search" class="form-control me-2" placeholder="Search" type="search">
-					<button class="btn btn-outline-dark" type="submit">
-						<i class="fa fa-search"></i>
-					</button>
+					<button class="btn btn-outline-dark" type="submit"><i class="fa fa-search"></i></button>
 				</form>
 			</div>
 
 			<div class=" bd-highlight">Log in</div>
-			<div class="nav-item px-3">
-				<i class=" btn fa fa-user-circle-o fa-lg"></i>
-			</div>
+			<div class="nav-item px-3"><i class=" btn fa fa-user-circle-o fa-lg"></i></div>
 
 		</div>
 	</div>
 </nav>
 
-<div class="pt-4 me-5 d-flex justify-content-end ">
-	<a th:href="@{/user/add}">
-		<button class="btn btn-secondary btn-lg"><i class = "fa fa-user"></i> Add New User</button>
+
+<div class = "py-3 mx-3">
+	<a th:href="@{/user/all}">
+		<button class="btn btn-secondary btn-sm"><i class="fa fa-arrow-left"> </i> Back</button>
 	</a>
 </div>
 
-<div class="pb-5">
-	<table class="table table-hover table-striped">
-		<thead>
-		<tr>
-			<th class="ps-5"> Name</th>
-			<th> Surname</th>
-			<th></th>
-			<th></th>
-			<th></th>
-			<th></th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr th:each="user : ${users}">
+<table class="mb-5 table">
 
-			<td class="ps-5">
-				<span th:text="${user.getName()}"> Name </span>
-			</td>
-			<td>
-				<span th:text="${user.getSurname()}"> Surname </span>
-			</td>
+	<thead>
+	<tr>
+		<th class = "ps-5"> Name</th>
+		<th> Surname</th>
+		<th> OIB</th>
+		<th> Address</th>
+		<th>E-mail</th>
 
-			<td></td>
+	</tr>
+	</thead>
 
-			<td>
-							<span class="d-flex justify-content-end ps-5">
-								<a th:href="'/user/info/' + ${user.id}">
-								<button class="btn btn-secondary btn-sm">Details</button>
-								</a>
+	<tbody>
+	<tr th:each="user : ${users}">
+		<td class = "ps-5">
+			<span th:text="${user.getName()}"></span>
+		</td>
+		<td>
+			<span th:text="${user.getSurname()}"></span>
+		</td>
+		<td>
+			<span th:text="${user.getOib()}"></span>
+		</td>
+		<td>
+			<span th:text="${user.getAddress()}"></span>
+		</td>
+		<td>
+			<span th:text="${user.getEmail()}"></span>
+		</td>
 
-							</span>
-			<td>
-							<span class="d-flex justify-content-end ps-5">
-								<a th:href="'/user/edit/' + ${user.id}">
-								<button class="btn btn-secondary btn-sm">Edit</button>
-								</a>
+	</tr>
 
-							</span>
-			</td>
-			<td>
-							<span class="d-flex justify-content-end pe-5">
-								<a th:href="'/user/delete/' + ${user.id}">
-									<button class="btn btn-secondary btn-sm">Delete</button>
-								</a>
-							</span>
-			</td>
+	</tbody>
 
-
-		</tr>
-
-		</tbody>
-	</table>
-</div>
+</table>
 
 </body>
 </html>

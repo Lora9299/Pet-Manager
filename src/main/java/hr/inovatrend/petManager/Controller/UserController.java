@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 @Controller
 @RequestMapping("/user")
 @SessionAttributes("user")
@@ -37,7 +36,7 @@ public class UserController {
     private String editUser(@PathVariable("id") Long id, Model model) {
 
 
-        User user = userService.getUser(id);
+        User user = userService.getUserById(id);
 
         model.addAttribute("user", user);
 
@@ -50,24 +49,36 @@ public class UserController {
 
         userService.createUser(user);
 
-        return "redirect:/";
+        return "redirect:/user/info/{id}";
     }
 
 
-        @GetMapping("/delete/{id}")
-        private String deleteUser(@PathVariable("id") Long id) {
+    @GetMapping("/delete/{id}")
+    private String deleteUser(@PathVariable("id") Long id) {
 
-            userService.deleteUserById(id);
+        userService.deleteUserById(id);
 
-            return "redirect:/user/all";
-        }
+        return "redirect:/user/all";
+    }
 
     @GetMapping("/all")
-    private String allUsers(Model model){
+    private String allUsers(Model model) {
 
-       model.addAttribute("users", userService.getAll());
+        model.addAttribute("users", userService.getAll());
 
-        return"/user/all-users";
+        return "/user/all-users";
+    }
+
+
+    @GetMapping("/info/{id}")
+    private String infoUser(@PathVariable("id") Long id, Model model) {
+
+        User user = userService.getUserById(id);
+
+        model.addAttribute("userDetails", user);
+
+        return "/user/info-user";
+
     }
 
 
