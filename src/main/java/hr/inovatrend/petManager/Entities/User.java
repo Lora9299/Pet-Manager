@@ -3,6 +3,8 @@ package hr.inovatrend.petManager.Entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -15,6 +17,9 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
+
+    @OneToMany (mappedBy = "user")
+    List<Animal> animals = new ArrayList<>();
 
     private String name;
     private String surname;
