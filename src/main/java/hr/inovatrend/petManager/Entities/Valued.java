@@ -10,7 +10,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Valued {
 
-    private Float price;
+    private Long price;
     private Boolean shippable;
 
 }

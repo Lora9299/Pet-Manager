@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
 @Controller
 @RequestMapping("/user")
 @SessionAttributes("user")
@@ -50,7 +49,7 @@ public class UserController {
 
         userService.createUser(user);
 
-        return "redirect:/user/all";
+        return "redirect:/user/info/{id}";
     }
 
 
@@ -76,7 +75,7 @@ public class UserController {
 
         User user = userService.getUserById(id);
 
-        model.addAttribute("users", user);
+        model.addAttribute("userDetails", user);
 
         return "/user/info-user";
 
