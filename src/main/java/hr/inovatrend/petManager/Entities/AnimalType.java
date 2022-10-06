@@ -1,10 +1,8 @@
 package hr.inovatrend.petManager.Entities;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-
 public enum AnimalType {
     CAT("Cat"),
     DOG("Dog"),
@@ -13,10 +11,12 @@ public enum AnimalType {
     BIRD("Bird"),
     REPTILE("Reptile");
 
-    private final String animal;
+    private final String displayValue;
 
-    AnimalType(String animal) {
+    AnimalType(String displayValue){
 
-        this.animal = animal;
+        this.displayValue = displayValue;
+
     }
+
 }
