@@ -2,6 +2,7 @@ package hr.inovatrend.petManager.Controller;
 
 
 import hr.inovatrend.petManager.Entities.Animal;
+import hr.inovatrend.petManager.Entities.AnimalType;
 import hr.inovatrend.petManager.Service.AnimalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ public class AnimalController {
     private String addAnimalToDB(Model model){
 
         model.addAttribute("animal", new Animal());
+        model.addAttribute("types", AnimalType.values());
         return "animal/add-animal";
 
     }
@@ -29,6 +31,17 @@ public class AnimalController {
 
         animalService.createAnimal(animal);
         return "redirect:/animal/all-animals";
+    }
+
+
+    @GetMapping("/all")
+    private String allAnimals(Model model){
+
+    model.addAttribute("animals", animalService.getAll());
+
+
+    return "/animal/all-animals";
+
     }
 
 
