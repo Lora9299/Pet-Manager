@@ -6,7 +6,7 @@
 	      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-	<title>Add User</title>
+	<title>Add Animal</title>
 </head>
 <body>
 
@@ -14,7 +14,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<div class="container-fluid">
 		<a class="navbar-brand" href="#"><i class="fa fa-paw"></i> Name-of-site</a>
-		<button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+		<button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+		        class="navbar-toggler"
 		        data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -24,11 +25,12 @@
 					<a aria-current="page" class="nav-link " th:href="@{/}">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" >Users</a>
+					<a class="nav-link">Users</a>
 				</li>
 				<li class="nav-item dropdown">
-					<a aria-expanded="false" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"  th:href="@{/animal/all}"
-					   id="navbarDropdown" role="button">
+					<a aria-expanded="false" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"
+					   id="navbarDropdown"
+					   role="button" th:href="@{/animal/all}">
 						Animals
 					</a>
 					<ul aria-labelledby="navbarDropdown" class="dropdown-menu">
@@ -88,9 +90,22 @@
 					       type="number">
 				</div>
 
+				<label class="form-label" for="age">Animal Type</label>
+				<select aria-label="Default select example" class="form-select"
+
+				        th:field="*{animal}">
+
+					<option th:each="type : ${types}"
+					        th:value="${type}"
+					        th:text="${type.displayValue}"
+					        ></option>
+
+				</select>
+
+				<br>
 				<div class="mb-3">
 					<label class="form-label" for="adoptionDate">Adoption Date</label>
-					<input type="date" class="form-control" id="adoptionDate" th:field="*{adoptable.adoptionDate}" >
+					<input class="form-control" id="adoptionDate" th:field="*{adoptable.adoptionDate}" type="date">
 				</div>
 
 				<div class="mb-3">
@@ -103,7 +118,7 @@
 					<input class="form-control" id="price" th:field="*{valued.price}" type="number">
 				</div>
 
-				<div class = "d-flex justify-content-between">
+				<div class="d-flex justify-content-between">
 					<div class="form-check">
 						<input class="form-check-input" id="adoptable" th:field="*{adoptable.isAdoptable}"
 						       th:value="*{adoptable.isAdoptable}" type="checkbox">
