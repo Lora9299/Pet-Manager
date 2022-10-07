@@ -6,6 +6,8 @@ import hr.inovatrend.petManager.Service.AnimalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -16,5 +18,12 @@ public class AnimalServiceImpl implements AnimalService {
     public Animal createAnimal(Animal animal){
         return animalRepository.save(animal);
     }
+
+    public List<Animal> getAll(){
+
+        return animalRepository.findAll();
+
+    }
+
 
 }
