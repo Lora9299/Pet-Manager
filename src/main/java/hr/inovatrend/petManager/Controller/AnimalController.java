@@ -18,7 +18,7 @@ public class AnimalController {
     private final AnimalService animalService;
 
     @GetMapping("/add")
-    private String addAnimalToDB(Model model){
+    private String saveAnimal(Model model){
 
         model.addAttribute("animal", new Animal());
         model.addAttribute("types", AnimalType.values());
@@ -29,7 +29,7 @@ public class AnimalController {
     @PostMapping("/add")
     private String createAnimal(@ModelAttribute Animal animal){
 
-        animalService.createAnimal(animal);
+        animalService.saveAnimal(animal);
         return "redirect:/animal/all-animals";
     }
 
