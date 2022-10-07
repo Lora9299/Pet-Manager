@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AnimalService {
 
-    Animal createAnimal(Animal animal);
+    Animal saveAnimal(Animal animal);
 
     List<Animal> getAll();
 

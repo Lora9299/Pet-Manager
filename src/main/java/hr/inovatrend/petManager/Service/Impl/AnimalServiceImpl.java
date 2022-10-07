@@ -15,7 +15,7 @@ public class AnimalServiceImpl implements AnimalService {
 
     private final AnimalRepository animalRepository;
 
-    public Animal createAnimal(Animal animal){
+    public Animal saveAnimal(Animal animal){
         return animalRepository.save(animal);
     }
 
