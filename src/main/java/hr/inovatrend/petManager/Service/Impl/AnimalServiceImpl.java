@@ -30,5 +30,10 @@ public class AnimalServiceImpl implements AnimalService {
 
     }
 
+    @Override
+    public void deleteAnimalById(Long id) {
 
+        animalRepository.deleteById(id);
+
+    }
 }

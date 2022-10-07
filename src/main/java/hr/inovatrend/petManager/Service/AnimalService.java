@@ -10,7 +10,8 @@ public interface AnimalService {
 
     List<Animal> getAll();
 
-
     Animal getAnimalById(Long id);
+
+    void deleteAnimalById(Long id);
 
 }
