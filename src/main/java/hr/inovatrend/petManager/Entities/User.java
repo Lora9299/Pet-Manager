@@ -1,5 +1,6 @@
 package hr.inovatrend.petManager.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,14 +19,15 @@ public class User {
     @GeneratedValue
     private Long id;
 
-    @OneToMany (mappedBy = "user")
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
     List<Animal> animals = new ArrayList<>();
 
     private String name;
     private String surname;
     private String oib;
 
-    @Column(unique=true)
+    @Column(unique = true)
     private String email;
 
     @Embedded
