@@ -21,7 +21,6 @@ public class Animal {
     @GeneratedValue
     private Long id;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "userid")
     @JsonManagedReference
