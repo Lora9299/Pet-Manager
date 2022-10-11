@@ -24,6 +24,11 @@ public class AnimalServiceImpl implements AnimalService {
         return animalRepository.findAll();
 
     }
+    public Animal getAnimalById(Long id){
+
+        return animalRepository.findAnimalById(id);
+
+    }
 
 
 }
