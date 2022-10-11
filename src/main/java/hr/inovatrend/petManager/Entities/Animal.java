@@ -31,6 +31,7 @@ public class Animal {
     private Integer height;
     private Integer weight;
     private Integer age;
+    private AnimalType animal;
 
     @Embedded
     private Adoptable adoptable;
