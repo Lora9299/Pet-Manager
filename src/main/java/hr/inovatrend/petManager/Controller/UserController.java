@@ -1,12 +1,17 @@
 package hr.inovatrend.petManager.Controller;
 
 
+import hr.inovatrend.petManager.Entities.Animal;
 import hr.inovatrend.petManager.Entities.User;
+import hr.inovatrend.petManager.Service.AnimalService;
 import hr.inovatrend.petManager.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 
 @Controller
 @RequestMapping("/user")
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    private final AnimalService animalService;
 
     @GetMapping("/add")
     private String addUserToDB(Model model) {
@@ -49,7 +55,7 @@ public class UserController {
 
         userService.createUser(user);
 
-        return "redirect:/user/info/{id}";
+        return "redirect:/user/all";
     }
 
 
@@ -75,7 +81,9 @@ public class UserController {
 
         User user = userService.getUserById(id);
 
-        model.addAttribute("userDetails", user);
+        model.addAttribute("users", user);
+
+        model.addAttribute("animals", animalService.getByUserId(id));
 
         return "/user/info-user";
 
