@@ -30,7 +30,7 @@ public class AnimalController {
     private String createAnimal(@ModelAttribute Animal animal) {
 
         animalService.saveAnimal(animal);
-        return "redirect:/animal/all-animals";
+        return "redirect:/animal/all";
     }
 
 
@@ -74,5 +74,15 @@ public class AnimalController {
 
         return "redirect:/animal/info/{id}";
     }
+
+    @GetMapping("/delete/{id}")
+    private String deleteAnimal(@PathVariable("id") Long id){
+
+         animalService.deleteAnimalById(id);
+
+         return "redirect:/animal/all";
+
+    }
+
 
 }
