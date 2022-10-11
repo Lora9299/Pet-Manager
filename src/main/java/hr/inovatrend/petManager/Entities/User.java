@@ -19,20 +19,27 @@ public class User {
     @GeneratedValue
     private Long id;
 
-    @OneToMany(mappedBy = "user")
+
     @JsonBackReference
+    @OneToMany (mappedBy = "user")
+
     List<Animal> animals = new ArrayList<>();
 
     private String name;
     private String surname;
     private String oib;
 
-    @Column(unique = true)
+    @Column(unique=true)
     private String email;
 
     @Embedded
     private Address address;
 
     private String password;
+
+    @Override
+    public String toString() {
+        return this.getName() + " " + this.getSurname();
+    }
 
 }
