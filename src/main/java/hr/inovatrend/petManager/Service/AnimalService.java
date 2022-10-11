@@ -14,4 +14,6 @@ public interface AnimalService {
 
     void deleteAnimalById(Long id);
 
+    List<Animal> getByUserId(Long id);
+
 }
