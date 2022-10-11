@@ -36,4 +36,11 @@ public class AnimalServiceImpl implements AnimalService {
         animalRepository.deleteById(id);
 
     }
+
+    @Override
+    public List<Animal> getByUserId(Long id){
+
+        return animalRepository.findByUserId(id);
+
+    }
 }

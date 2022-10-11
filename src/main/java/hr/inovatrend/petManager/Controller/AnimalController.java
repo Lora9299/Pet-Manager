@@ -4,6 +4,7 @@ package hr.inovatrend.petManager.Controller;
 import hr.inovatrend.petManager.Entities.Animal;
 import hr.inovatrend.petManager.Entities.AnimalType;
 import hr.inovatrend.petManager.Service.AnimalService;
+import hr.inovatrend.petManager.Service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,12 +17,14 @@ import org.springframework.web.bind.annotation.*;
 public class AnimalController {
 
     private final AnimalService animalService;
+    private final UserService userService;
 
     @GetMapping("/add")
     private String saveAnimal(Model model) {
 
         model.addAttribute("animal", new Animal());
         model.addAttribute("types", AnimalType.values());
+        model.addAttribute("users",userService.getAll());
         return "animal/add-animal";
 
     }
