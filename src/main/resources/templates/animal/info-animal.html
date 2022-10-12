@@ -2,72 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-	      rel="stylesheet">
+	<div th:replace="index.html :: headfiles"></div>
 	<title>Info</title>
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<div class="container-fluid">
-		<a class="navbar-brand" href="#"><i class="fa fa-paw"></i> Name-of-site</a>
-		<button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-		        class="navbar-toggler"
-		        data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<a aria-current="page" class="nav-link " th:href="@{/}">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" th:href="@{/user/all}">Users</a>
-				</li>
-				<li class="nav-item dropdown">
-					<a aria-expanded="false" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown"
-					   id="navbarDropdown" role="button" th:href="@{/animal/all}">
-						Animals
-					</a>
-					<ul aria-labelledby="navbarDropdown" class="dropdown-menu">
-						<li>
-							<a class="dropdown-item" href="#">Action</a>
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">Another action</a>
-						</li>
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-						<li>
-							<a class="dropdown-item" href="#">Something else here</a>
-						</li>
-					</ul>
-				</li>
-
-			</ul>
-
-			<div class="d-flex align-middle px-5">
-				<form class="d-flex ">
-					<input aria-label="Search" class="form-control me-2" placeholder="Search" type="search">
-					<button class="btn btn-outline-dark" type="submit">
-						<i class="fa fa-search"></i>
-					</button>
-				</form>
-			</div>
-
-			<div class=" bd-highlight">Log in</div>
-			<div class="nav-item px-3">
-				<i class=" btn fa fa-user-circle-o fa-lg"></i>
-			</div>
-
-		</div>
-	</div>
-</nav>
-
+<nav th:replace="animal/all-animals.html :: navbarAnimalActive"></nav>
 
 <div class="py-3 mx-3">
 	<a th:href="@{/animal/all}">
