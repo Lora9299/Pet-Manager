@@ -5,10 +5,18 @@ import hr.inovatrend.petManager.Entities.Animal;
 import hr.inovatrend.petManager.Entities.AnimalType;
 import hr.inovatrend.petManager.Service.AnimalService;
 import hr.inovatrend.petManager.Service.UserService;
+import hr.inovatrend.petManager.Specifications.AnimalSpecification;
+import hr.inovatrend.petManager.Specifications.AnimalSpecificationBuilder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/animal")
@@ -24,7 +32,7 @@ public class AnimalController {
 
         model.addAttribute("animal", new Animal());
         model.addAttribute("types", AnimalType.values());
-        model.addAttribute("users",userService.getAll());
+        model.addAttribute("users", userService.getAll());
         return "animal/add-animal";
 
     }
@@ -38,10 +46,9 @@ public class AnimalController {
 
 
     @GetMapping("/all")
-    private String allAnimals(Model model) {
+    private String allAnimals(Model model, @Param("search") String search) {
 
-        model.addAttribute("animals", animalService.getAll());
-
+        model.addAttribute("animals", animalService.getAll(search));
 
         return "/animal/all-animals";
 
@@ -71,7 +78,7 @@ public class AnimalController {
     }
 
     @PostMapping("edit/{id}")
-    private String animalEdit(@PathVariable("id") Long id, @ModelAttribute Animal animal){
+    private String animalEdit(@PathVariable("id") Long id, @ModelAttribute Animal animal) {
 
         animalService.saveAnimal(animal);
 
@@ -79,12 +86,20 @@ public class AnimalController {
     }
 
     @GetMapping("/delete/{id}")
-    private String deleteAnimal(@PathVariable("id") Long id){
+    private String deleteAnimal(@PathVariable("id") Long id) {
 
-         animalService.deleteAnimalById(id);
+        animalService.deleteAnimalById(id);
 
-         return "redirect:/animal/all";
+        return "redirect:/animal/all";
 
+    }
+
+    @GetMapping("/test")
+    private String test(@RequestParam(value = "search") String search) {
+
+
+        List<Animal> test = animalService.getBySearch(search);
+        return "";
     }
 
 
