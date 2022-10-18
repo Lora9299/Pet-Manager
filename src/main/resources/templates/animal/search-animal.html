@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<div th:replace="index.html :: headfiles"></div>
+	<title>Search</title>
+</head>
+<body>
+<nav th:replace="animal/all-animals.html :: navbarAnimalActive"></nav>
+
+<div class="p-5">
+
+	<div class="container border w-50 px-5 ">
+
+		<div class="container w-75 mt-5 mb-5">
+			<h2 class="d-flex justify-content-center">Search for Animal</h2>
+
+			<form action="/animal/result" method="post" th:object="${animal}">
+
+				<div class="mb-3">
+					<label class="form-label" for="name">Name</label>
+					<input class="form-control" id="name" name="name" placeholder="Name" th:field="*{name}" type="text">
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" for="height">Height</label>
+
+					<div class="input-group mb-3">
+						<input class="form-control w-75" id="height" name="height" placeholder="Height" th:field="*{height}"
+						       type="number" min="0">
+
+						<select aria-label="Default select example" class="form-select text-center"
+						        th:field="*{operatorHeight}">
+
+							<option th:each="operator : ${operators}"
+							        th:text="${operator.displayValue}"
+							        th:value="${operator}"
+							></option>
+
+						</select>
+					</div>
+
+
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" for="weight">Weight</label>
+					<div class="input-group mb-3">
+						<input class="form-control w-75" id="weight" name="weight" placeholder="Weight" th:field="*{weight}"
+						       type="number" min="0">
+						<select aria-label="Default select example" class="form-select text-center"  th:field="*{operatorWeight}">
+
+							<option th:each="operator : ${operators}"
+							        th:text="${operator.displayValue}"
+							        th:value="${operator}"
+							></option>
+
+						</select>
+					</div>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label" for="age">Age</label>
+
+					<div class="input-group mb-3">
+						<input class="form-control w-75" id="age" name="age" placeholder="Age" th:field="*{age}"
+						       type="number" min="0">
+						<select aria-label="Default select example" class="form-select text-center"  th:field="*{operatorAge}">
+
+							<option th:each="operator : ${operators}"
+							        th:text="${operator.displayValue}"
+							        th:value="${operator}"
+							></option>
+
+						</select>
+					</div>
+
+
+				</div>
+
+				<label class="form-label" for="age">Animal Type</label>
+				<select aria-label="Default select example" class="form-select"
+
+				        th:field="*{animal}">
+
+					<option th:each="type : ${types}"
+					        th:text="${type.displayValue}"
+					        th:value="${type}"
+					></option>
+
+				</select>
+
+				<div class="mb-3">
+					<label class="form-label" for="price">Price</label>
+
+					<div class="input-group mb-3">
+						<input class="form-control w-75" id="price" th:field="*{valued.price}" type="number" min="0">
+						<select aria-label="Default select example" class="form-select text-center"  th:field="*{operatorValued}">
+
+							<option th:each="operator : ${operators}"
+							        th:text="${operator.displayValue}"
+							        th:value="${operator}"
+							></option>
+
+						</select>
+					</div>
+
+				</div>
+
+				<div class="d-flex justify-content-center">
+					<button class="btn btn-secondary btn-lg" type="submit">Search</button>
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

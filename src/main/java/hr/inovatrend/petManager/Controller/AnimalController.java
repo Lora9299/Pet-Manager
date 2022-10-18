@@ -3,6 +3,8 @@ package hr.inovatrend.petManager.Controller;
 
 import hr.inovatrend.petManager.Entities.Animal;
 import hr.inovatrend.petManager.Entities.AnimalType;
+import hr.inovatrend.petManager.Entities.Enums.Operators;
+import hr.inovatrend.petManager.Entities.ResultAnimal;
 import hr.inovatrend.petManager.Service.AnimalService;
 import hr.inovatrend.petManager.Service.UserService;
 import hr.inovatrend.petManager.Specifications.AnimalSpecification;
@@ -94,12 +96,50 @@ public class AnimalController {
 
     }
 
-    @GetMapping("/test")
-    private String test(@RequestParam(value = "search") String search) {
+    @GetMapping("/search")
+    private String search(String search, Model model) {
 
-
+        model.addAttribute("animal", new ResultAnimal());
+        model.addAttribute("types", AnimalType.values());
+        model.addAttribute("operators", Operators.values());
         List<Animal> test = animalService.getBySearch(search);
-        return "";
+        return "/animal/search-animal";
+    }
+
+    @PostMapping("/result")
+    private String result(@ModelAttribute ResultAnimal animal, Model model) {
+
+        StringBuilder results = new StringBuilder();
+
+        if (!animal.getName().isEmpty() && animal.getName() != null) {
+            results.append("name:" + animal.getName() + ",");
+        }
+        if (animal.getHeight() != null) {
+
+            results.append("height" + animal.getOperatorHeight().getDisplayValue() + animal.getHeight() + ",");
+
+        }
+        if (animal.getWeight() != null) {
+            results.append("weight" + animal.getOperatorWeight().getDisplayValue() + animal.getWeight() + ",");
+        }
+        if (animal.getAnimal() != null) {
+            results.append("animal:\"" + animal.getAnimal() + "\",");
+        }
+        if (animal.getAge() != null) {
+            results.append("age" + animal.getOperatorAge().getDisplayValue() + animal.getAge() + ",");
+        }  /*if ( animal.getValued() != null) {
+            results.append("valued.price" + animal.getOperatorValued().getDisplayValue() + animal.getValued().getPrice() + ",");
+        }*/
+
+
+        String concreteResults = results.deleteCharAt(results.toString().length()-1).toString();
+
+        List<Animal> animals = animalService.getBySearch(concreteResults);
+
+        model.addAttribute("animals", animals);
+
+        return "/animal/search-result-animals";
+
     }
 
 
