@@ -7,18 +7,15 @@ import hr.inovatrend.petManager.Entities.Enums.Operators;
 import hr.inovatrend.petManager.Entities.ResultAnimal;
 import hr.inovatrend.petManager.Service.AnimalService;
 import hr.inovatrend.petManager.Service.UserService;
-import hr.inovatrend.petManager.Specifications.AnimalSpecification;
-import hr.inovatrend.petManager.Specifications.AnimalSpecificationBuilder;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/animal")
@@ -26,121 +23,114 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 public class AnimalController {
 
-    private final AnimalService animalService;
-    private final UserService userService;
+	private final AnimalService animalService;
+	private final UserService userService;
 
-    @GetMapping("/add")
-    private String saveAnimal(Model model) {
+	@GetMapping("/add")
+	private String saveAnimal(Model model) {
 
-        model.addAttribute("animal", new Animal());
-        model.addAttribute("types", AnimalType.values());
-        model.addAttribute("users", userService.getAll());
-        return "animal/add-animal";
+		model.addAttribute("animal", new Animal());
+		model.addAttribute("types", AnimalType.values());
+		model.addAttribute("users", userService.getAll());
+		return "animal/add-animal";
 
-    }
+	}
 
-    @PostMapping("/add")
-    private String createAnimal(@ModelAttribute Animal animal) {
+	@PostMapping("/add")
+	private String createAnimal(@ModelAttribute Animal animal) {
 
-        animalService.saveAnimal(animal);
-        return "redirect:/animal/all";
-    }
-
-
-    @GetMapping("/all")
-    private String allAnimals(Model model, @Param("search") String search) {
-
-        model.addAttribute("animals", animalService.getAll(search));
-
-        return "/animal/all-animals";
-
-    }
-
-    @GetMapping("/info/{id}")
-    private String infoAnimal(@PathVariable("id") Long id, Model model) {
-
-        Animal animal = animalService.getAnimalById(id);
-
-        model.addAttribute("animals", animal);
+		animalService.saveAnimal(animal);
+		return "redirect:/animal/all";
+	}
 
 
-        return "/animal/info-animal";
-    }
+	@GetMapping("/all")
+	private String allAnimals(Model model, @Param("search") String search) {
 
-    @GetMapping("edit/{id}")
-    private String editAnimal(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("animals", animalService.getAll(search));
 
-        Animal animal = animalService.getAnimalById(id);
-        model.addAttribute("animal", animal);
-        model.addAttribute("types", AnimalType.values());
+		return "/animal/all-animals";
+
+	}
+
+	@GetMapping("/info/{id}")
+	private String infoAnimal(@PathVariable("id") Long id, Model model) {
+
+		Animal animal = animalService.getAnimalById(id);
+
+		model.addAttribute("animals", animal);
 
 
-        return "/animal/edit-animal";
+		return "/animal/info-animal";
+	}
 
-    }
+	@GetMapping("edit/{id}")
+	private String editAnimal(@PathVariable("id") Long id, Model model) {
 
-    @PostMapping("edit/{id}")
-    private String animalEdit(@PathVariable("id") Long id, @ModelAttribute Animal animal) {
+		Animal animal = animalService.getAnimalById(id);
+		model.addAttribute("animal", animal);
+		model.addAttribute("types", AnimalType.values());
 
-        animalService.saveAnimal(animal);
 
-        return "redirect:/animal/info/{id}";
-    }
+		return "/animal/edit-animal";
 
-    @GetMapping("/delete/{id}")
-    private String deleteAnimal(@PathVariable("id") Long id) {
+	}
 
-        animalService.deleteAnimalById(id);
+	@PostMapping("edit/{id}")
+	private String animalEdit(@PathVariable("id") Long id, @ModelAttribute Animal animal) {
 
-        return "redirect:/animal/all";
+		animalService.saveAnimal(animal);
 
-    }
+		return "redirect:/animal/info/{id}";
+	}
 
-    @GetMapping("/search")
-    private String search(String search, Model model) {
+	@GetMapping("/delete/{id}")
+	private String deleteAnimal(@PathVariable("id") Long id) {
 
-        model.addAttribute("animal", new ResultAnimal());
-        model.addAttribute("types", AnimalType.values());
-        model.addAttribute("operators", Operators.values());
-        List<Animal> test = animalService.getBySearch(search);
-        return "/animal/search-animal";
-    }
+		animalService.deleteAnimalById(id);
 
-    @PostMapping("/result")
-    private String result(@ModelAttribute ResultAnimal animal, Model model) {
+		return "redirect:/animal/all";
 
-        StringBuilder results = new StringBuilder();
+	}
 
-        if (!animal.getName().isEmpty() && animal.getName() != null) {
-            results.append("name:" + animal.getName() + ",");
-        }
-        if (animal.getHeight() != null) {
+	@GetMapping("/search")
+	private String search(Model model) {
 
-            results.append("height" + animal.getOperatorHeight().getDisplayValue() + animal.getHeight() + ",");
+		model.addAttribute("animal", new ResultAnimal());
+		model.addAttribute("types", AnimalType.values());
+		model.addAttribute("operators", Operators.values());
+		return "/animal/search-animal";
+	}
 
-        }
-        if (animal.getWeight() != null) {
-            results.append("weight" + animal.getOperatorWeight().getDisplayValue() + animal.getWeight() + ",");
-        }
-        if (animal.getAnimal() != null) {
-            results.append("animal:\"" + animal.getAnimal() + "\",");
-        }
-        if (animal.getAge() != null) {
-            results.append("age" + animal.getOperatorAge().getDisplayValue() + animal.getAge() + ",");
-        }  /*if ( animal.getValued() != null) {
+	@PostMapping("/result")
+	private String result(@ModelAttribute ResultAnimal animal, Model model) {
+		Map<String, Object> results = new HashMap<>();
+
+		if (!animal.getName().isEmpty() && animal.getName() != null) {
+			results.put("name:", animal.getName());
+		}
+		if (animal.getHeight() != null) {
+			results.put("height" + animal.getOperatorHeight().getDisplayValue(), animal.getHeight());
+		}
+		if (animal.getWeight() != null) {
+			results.put("weight" + animal.getOperatorWeight().getDisplayValue(), animal.getWeight());
+		}
+		if (animal.getAnimal() != null) {
+			results.put("animal:", animal.getAnimal());
+		}
+		if (animal.getAge() != null) {
+			results.put("age" + animal.getOperatorAge().getDisplayValue(), animal.getAge());
+		}  /*if ( animal.getValued() != null) {
             results.append("valued.price" + animal.getOperatorValued().getDisplayValue() + animal.getValued().getPrice() + ",");
         }*/
 
+		List<Animal> animals = animalService.getBySearch(results);
 
-        String concreteResults = results.deleteCharAt(results.toString().length()-1).toString();
+		model.addAttribute("animals", animals);
 
-        List<Animal> animals = animalService.getBySearch(concreteResults);
+		return "/animal/search-result-animals";
 
-        model.addAttribute("animals", animals);
-
-        return "/animal/search-result-animals";
-
-    }
+	}
 
 
 }
